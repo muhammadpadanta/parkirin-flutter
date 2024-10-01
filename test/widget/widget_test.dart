@@ -7,8 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:parkirin/main.dart';
+import 'package:parkirin/main.dart'; // Import the main.dart file where MyApp is defined
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

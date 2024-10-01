@@ -2,80 +2,92 @@ import 'package:flutter/material.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
-  final Function(int) onItemTapped;
+  final ValueChanged<int> onItemTapped;
 
   const CustomBottomNavBar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 5,
-                blurRadius: 10,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final cardTheme = theme.cardTheme;
+    final shadowColor = theme.shadowColor;
+
+    return Container(
+      height: 90,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: cardTheme.color,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: shadowColor,
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 0),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
             elevation: 0,
             currentIndex: selectedIndex,
-            selectedItemColor: Colors.blue[400],
-            unselectedItemColor: Colors.grey,
+            selectedItemColor: colorScheme.primary,
+            unselectedItemColor: textTheme.bodyLarge?.color,
             showSelectedLabels: true,
             showUnselectedLabels: true,
             onTap: onItemTapped,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                label: 'History',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code_scanner),
-                label: 'Scan',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Account',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
-            ],
+            selectedLabelStyle: textTheme.bodyMedium?.copyWith(fontSize: 14),
+            unselectedLabelStyle: textTheme.bodyMedium?.copyWith(fontSize: 14),
+            selectedIconTheme: const IconThemeData(size: 28),
+            unselectedIconTheme: const IconThemeData(size: 28),
+            items: _buildNavBarItems(colorScheme.primary),
           ),
         ),
-        Positioned(
-          bottom: 70,
-          left: MediaQuery.of(context).size.width * (selectedIndex / 5) + 32,
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            width: MediaQuery.of(context).size.width / 5 - 64,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.blue[400],
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
+  }
+
+  List<BottomNavigationBarItem> _buildNavBarItems(Color selectedColor) {
+    final items = [
+      (Icons.home, 'Home'),
+      (Icons.receipt, 'History'),
+      (Icons.qr_code_scanner, 'Scan'),
+      (Icons.person, 'Account'),
+      (Icons.settings, 'Settings'),
+    ];
+
+    return items.asMap().entries.map((entry) {
+      final index = entry.key;
+      final (icon, label) = entry.value;
+      return BottomNavigationBarItem(
+        icon: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (selectedIndex == index)
+              Container(
+                width: 35,
+                height: 5,
+                margin: const EdgeInsets.only(bottom: 4),
+                decoration: BoxDecoration(
+                  color: selectedColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            Icon(icon),
+          ],
+        ),
+        label: label,
+      );
+    }).toList();
   }
 }

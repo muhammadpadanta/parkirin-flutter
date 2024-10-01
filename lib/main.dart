@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'features/driver/views/driver_home_page.dart'; // Import the driver home page
+import 'package:parkirin/features/onboarding/views/onboarding_main.dart';
+import 'config/app_theme.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -11,8 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DriverHomePage(),
+      title: 'Parkirin',
+      theme: CatppuccinTheme.lightTheme,
+      darkTheme: CatppuccinTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const OnboardingMainScreen(),
     );
   }
 }

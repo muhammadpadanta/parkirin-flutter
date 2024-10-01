@@ -1,8 +1,8 @@
-# 🚗 Parkirin — Cashless Parking Made Simple in Batam City
+# 🚗 Parkirin Mobile — Cashless Parking Made Simple in Batam City
 
 ### Overview
 
-Parkirin is a modern parking payment solution designed to streamline on-street parking in Batam City with a cashless system. Say goodbye to coins and hello to convenience — pay instantly with QRIS or your favorite payment method using our mobile app!
+Parkirin Mobile is a modern parking payment solution designed to streamline on-street parking in Batam City with a cashless system. No more waiting for changes and hello to convenience! Pay instantly with QRIS or your favorite payment method using our mobile app.
 
 ### 📱 Key Features
 
@@ -19,7 +19,7 @@ Parkirin is a modern parking payment solution designed to streamline on-street p
   - View a detailed payment history for all your parking sessions.
   - Manage your profile and change the app's language (Indonesian or English).
 
-- **Cashless & Cash Payment Support**: Choose how you want to pay—use QRIS or cash, whichever is more convenient.
+- **Cashless & Cash Payment Support**: Choose how you want to pay—use Cashless or cash, whichever is more convenient.
 
 - **Notifications**: Get real-time updates for successful or failed payments and other key events.
 
@@ -30,7 +30,7 @@ Parkirin is a modern parking payment solution designed to streamline on-street p
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/muhammadpadanta/parkirin.git
+   git clone https://github.com/muhammadpadanta/parkirin-flutter.git
    ```
 
 2. **Install Dependencies:**:
@@ -49,7 +49,7 @@ Parkirin is a modern parking payment solution designed to streamline on-street p
 - **Flutter**: Front-end framework.
 - **Firebase**: Backend service for authentication and notifications.
 - **QRIS**: For seamless cashless payments.
-- **Xendit**: Payment gateway integration for non-QRIS methods.
+- **Midtrans**: Payment gateway integration for non-QRIS methods.
 
 ---
 
